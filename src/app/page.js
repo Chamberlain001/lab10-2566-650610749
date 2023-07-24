@@ -36,7 +36,8 @@ export default function RandomUserPage() {
   };
 
   useEffect(() => {
-    const num = JSON.parse(localStorage.getItem("Amount"));
+    const num1 = localStorage.getItem("Amount");
+    const num = JSON.parse(num1);
     setGenAmount(num);
   }, []);
 
