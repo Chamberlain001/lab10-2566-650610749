@@ -2,7 +2,7 @@
 
 import { cleanUser } from "@/libs/cleanUser";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserCard } from "@/components/UserCard";
 
 export default function RandomUserPage() {
@@ -23,8 +23,22 @@ export default function RandomUserPage() {
     //Then update state with function : setUsers(...)
     const cleanedUsers = users.map((x) => cleanUser(x));
     setUsers(cleanedUsers);
-    localStorage.setItem("Amount", genAmount);
+
+    const [isFirst, setIsFirst] = useState(true);
+
+    useEffect(() => {
+      if (isFirst) {
+        setIsFirst(false);
+        return;
+      }
+      localStorage.setItem("Amount", genAmount);
+    }, [genAmount]);
   };
+
+  useEffect(() => {
+    const num = JSON.parse(localStorage.getItem("Amount"));
+    setGenAmount(num);
+  }, []);
 
   return (
     <div style={{ maxWidth: "700px" }} className="mx-auto">
