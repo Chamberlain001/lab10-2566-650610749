@@ -10,7 +10,7 @@ export default function RandomUserPage() {
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [genAmount, setGenAmount] = useState(1);
-
+  const [isFirst, setIsFirst] = useState(true);
   const generateBtnOnClick = async () => {
     setIsLoading(true);
     const resp = await axios.get(
@@ -23,8 +23,6 @@ export default function RandomUserPage() {
     //Then update state with function : setUsers(...)
     const cleanedUsers = users.map((x) => cleanUser(x));
     setUsers(cleanedUsers);
-
-    const [isFirst, setIsFirst] = useState(true);
   };
   useEffect(() => {
     if (isFirst) {
