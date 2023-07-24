@@ -25,19 +25,17 @@ export default function RandomUserPage() {
     setUsers(cleanedUsers);
 
     const [isFirst, setIsFirst] = useState(true);
-
-    useEffect(() => {
-      if (isFirst) {
-        setIsFirst(false);
-        return;
-      }
-      localStorage.setItem("Amount", genAmount);
-    }, [genAmount]);
   };
+  useEffect(() => {
+    if (isFirst) {
+      setIsFirst(false);
+      return;
+    }
+    localStorage.setItem("Amount", genAmount);
+  }, [genAmount]);
 
   useEffect(() => {
-    const num1 = localStorage.getItem("Amount");
-    const num = JSON.parse(num1);
+    const num = JSON.parse(localStorage.getItem("Amount"));
     setGenAmount(num);
   }, []);
 
